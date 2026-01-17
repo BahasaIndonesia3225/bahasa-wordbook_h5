@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "author": "liyujian3225 <icanflyanywhere@126.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "deploy": "umi build && node ./deploy.config.js"
+  },
+  "dependencies": {
+    "@ant-design/x": "^1.0.5",
+    "@microsoft/fetch-event-source": "^2.0.1",
+    "@react-pdf/renderer": "^3.4.4",
+    "antd-mobile": "^5.32.1",
+    "antd-mobile-icons": "^0.3.0",
+    "bizgoblin": "^0.2.0",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.9",
+    "markdown-it": "^14.1.0",
+    "ssh2-sftp-client": "^11.0.0",
+    "umi": "^4.0.79"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@umijs/plugins": "^4.0.81",
+    "typescript": "^5.2.2",
+    "umi-request": "^1.4.0"
+  }
+}
