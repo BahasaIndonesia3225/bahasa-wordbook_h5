@@ -6,8 +6,7 @@
 /src/.umi-production
 /src/.umi-test
 /dist
-/portuguesa.cn
-/indonesia.bahasaindo.cn
+/ptdworkbook.cn
 .swc
 
 # Log files

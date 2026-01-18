@@ -1,0 +1,67 @@
+.wordBookCatalog {
+  padding: 16px 16px 12px;
+  .wordBookCatalogInner {
+    ul {
+      li {
+        width: 100%;
+        height: 115px;
+        border-radius: 16px;
+        padding: 12px;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        >.bookLogo {
+          width: 70px;
+          height: 90px;
+          margin-right: 12px;
+        }
+        >.bookContent {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          p:first-child {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000000;
+          }
+          p:nth-child(2) {
+            font-size: 14px;
+            font-weight: bold;
+            color: rgba(10, 7, 8, 0.6);
+            margin-bottom: 20px;
+          }
+          >div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >span {
+              color: rgba(10, 7, 8, 0.6);
+              font-size: 12px;
+              margin-right: 12px;
+            }
+            div.buttonGroup {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: end;
+              >div {
+                width: 48px;
+                height: 24px;
+                line-height: 24px;
+                text-align: center;
+                border-radius: 36px;
+                >span {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
