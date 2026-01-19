@@ -51,6 +51,14 @@ const WordBookCatalog = (props) => {
     navigate("/wordBookCreate", { replace: true });
   }
 
+  const handleCheckWordBookCatalog = (item) => {
+    const { id, name } = item;
+    navigate("/wordBookCheck", {
+      replace: true,
+      state: { id, name }
+    });
+  }
+
   //单词本列表
   const [loading, setLoading] = useState(false)
   const [wordBookList, setWordBookList] = useState([]);
@@ -95,6 +103,7 @@ const WordBookCatalog = (props) => {
                     const { id, name, language, colorType, colorHex, createTime, num } = item;
                     return (
                       <li
+                        onClick={() => handleCheckWordBookCatalog(item)}
                         style={{ backgroundColor: getRgbaColor(colorHex, 0.1) }}
                         key={id}>
                         <Image

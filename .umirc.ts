@@ -33,6 +33,7 @@ export default defineConfig({
     { path: "/login", component: "login", name: "Selamat datang 欢迎" },
     { path: "/wordBookCatalog", component: "wordBookCatalog", name: "单词本" },
     { path: "/wordBookCreate", component: "wordBookCreate", name: "创建单词本" },
+    { path: "/wordBookCheck", component: "wordBookCheck", name: "查看单词本" },
     // { path: "/courseDetail", component: "courseDetail", name: "单词列表" },
     // { path: "/collectWord", component: "collectWord", name: "收藏" },
     // { path: "/wordSearch", component: "wordSearch", name: "单词搜索" },

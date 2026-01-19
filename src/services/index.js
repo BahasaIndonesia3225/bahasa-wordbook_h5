@@ -25,7 +25,6 @@ request.interceptors.response.use(async (response, options) => {
   const { url, status } = response;
   if(status === 200) {
     let data = await response.clone().json();
-    console.log(data)
   }else if(status === 401) {
     //未登录或登录失效
     props.dispatch({
