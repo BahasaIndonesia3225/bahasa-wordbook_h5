@@ -1,0 +1,18 @@
+[
+    {"en": "RU", "link": "https://storage.googleapis.com/catatdong/RU.png", "code": "+7", "CHN": "俄语"},
+    {"en": "DE", "link": "https://storage.googleapis.com/catatdong/DE.png", "code": "+49", "CHN": "德语"},
+    {"en": "FR", "link": "https://storage.googleapis.com/catatdong/FR.png", "code": "+33", "CHN": "法语"},
+    {"en": "ES", "link": "https://storage.googleapis.com/catatdong/ES.png", "code": "+34", "CHN": "西班牙语"},
+    {"en": "PT", "link": "https://storage.googleapis.com/catatdong/PT.png", "code": "+351", "CHN": "葡萄牙语"},
+    {"en": "NL", "link": "https://storage.googleapis.com/catatdong/NL.png", "code": "+31", "CHN": "荷兰语"},
+    {"en": "HU", "link": "https://storage.googleapis.com/catatdong/HU.png", "code": "+36", "CHN": "匈牙利语"},
+    {"en": "US", "link": "https://storage.googleapis.com/catatdong/US.png", "code": "+1", "CHN": "英语"},
+    {"en": "JP", "link": "https://storage.googleapis.com/catatdong/JP.png", "code": "+81", "CHN": "日语"},
+    {"en": "KR", "link": "https://storage.googleapis.com/catatdong/KR.png", "code": "+82", "CHN": "韩语"},
+    {"en": "MN", "link": "https://storage.googleapis.com/catatdong/MN.png", "code": "+976", "CHN": "蒙古语"},
+    {"en": "TH", "link": "https://storage.googleapis.com/catatdong/TH.png", "code": "+66", "CHN": "泰语"},
+    {"en": "PH", "link": "https://storage.googleapis.com/catatdong/PH.png", "code": "+63", "CHN": "菲律宾语"},
+    {"en": "SG", "link": "https://storage.googleapis.com/catatdong/SG.png", "code": "+65", "CHN": "英语"},
+    {"en": "ID", "link": "https://storage.googleapis.com/catatdong/ID.png", "code": "+62", "CHN": "印尼语"},
+    {"en": "VN", "link": "https://storage.googleapis.com/catatdong/VN.png", "code": "+84", "CHN": "越南语"}
+]

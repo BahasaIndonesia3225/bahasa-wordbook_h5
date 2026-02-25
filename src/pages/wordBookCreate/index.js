@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {useNavigate, connect } from 'umi';
-import { Form, Input, TextArea, Button, Selector, Empty, Dialog, Image, Radio, Space } from 'antd-mobile'
+import { Form, Input, TextArea, Button, Picker, Space, Image } from 'antd-mobile'
 import { request } from '@/services';
+import countryCode from '@/utils/countryCode.json'
 import convert from 'color-convert';
 import './index.less'
 
@@ -19,15 +20,45 @@ const colorOptions = [
 const WordBookCreate = () => {
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(); // 添加状态跟踪选中的颜色
 
-  // 处理颜色选择
+  //处理颜色选择
+  const [selectedColor, setSelectedColor] = useState();
   const handleColorSelect = (colorValue) => {
     setSelectedColor(colorValue); // 更新本地状态
     form.setFieldValue('colour', colorValue); // 更新表单字段
-    // 触发表单校验以清除错误提示
     form.validateFields(['colour']).catch(() => {});
   }
+
+  //处理语言选择
+  const basicColumns = countryCode.map((item, index) => {
+    const { en, link, code, CHN } = item;
+    return {
+      label: CHN,
+      value: en,
+      link,
+      code
+    }
+  })
+  const [visible, setVisible] = useState(false)
+  const [selectedLanguage, setSelectedLanguage] = useState([])
+  const handleLanguageSelect = (languageValue) => {
+    setSelectedLanguage(languageValue)
+    form.setFieldValue('language', languageValue); // 更新表单字段
+    form.validateFields(['language']).catch(() => {});
+  }
+  const labelRenderer = useCallback((item) => {
+    const { label, link } = item;
+    return (<Space justify='start' block>
+      <Image
+        src={link}
+        width={28}
+        height={20}
+        fit='cover'
+      />
+      <span>{label}</span>
+    </Space>)
+
+  }, [])
 
   const onFinish = () => {
     setLoading(true);
@@ -101,7 +132,22 @@ const WordBookCreate = () => {
           <Form.Item
             name='language'
             label='单词本语言'
-            rules={[{ required: true, message: '备注不能为空' }]}>
+            rules={[{ required: true, message: '请选择单词本语言' }]}>
+            <span
+              onClick={() => setVisible(true)}>
+              {selectedLanguage[0] || '未选择'}
+            </span>
+            <Picker
+              title='语言选择'
+              columns={[basicColumns]}
+              visible={visible}
+              onClose={() => {
+                setVisible(false)
+              }}
+              value={selectedLanguage}
+              onConfirm={value => handleLanguageSelect(value)}
+              renderLabel={labelRenderer}
+            />
           </Form.Item>
           <Form.Item
             name='remark'
