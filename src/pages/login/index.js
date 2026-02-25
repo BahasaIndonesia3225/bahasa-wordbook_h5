@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, connect } from 'umi';
 import { Modal, Form, Input, Button, AutoCenter, Checkbox, Space, Radio, Image } from 'antd-mobile';
-import {setCookie, getCookie, clearCookie} from '@/utils/rememberPassword';
+import { setCookie, getCookie, clearCookie } from '@/utils/rememberPassword';
 import { request } from '@/services';
 import './index.less';
 

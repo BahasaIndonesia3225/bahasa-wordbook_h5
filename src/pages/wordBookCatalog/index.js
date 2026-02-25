@@ -8,13 +8,15 @@ import './index.less'
 const WordBookCatalog = (props) => {
   const navigate = useNavigate();
 
+  //pink_FD7BB1
   const getRgbaColor = (color, opacity) => {
     const colorArray = convert.hex.rgb(color);
     return `rgba(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]}, ${opacity})`
   }
 
+  //单词本删除
   const handleDeleteWordBookCatalog = (event, item) => {
-    event.preventDefault();
+    event.stopPropagation();
     const { id, name } = item;
     Dialog.show({
       header: (
@@ -47,14 +49,16 @@ const WordBookCatalog = (props) => {
     })
   }
 
+  //单词本创建
   const handleCreateWordBookCatalog = () => {
-    navigate("/wordBookCreate", { replace: true });
+    navigate("/wordBookCreate", { replace: false });
   }
 
+  //单词本查看
   const handleCheckWordBookCatalog = (item) => {
     const { id, name } = item;
     navigate("/wordBookCheck", {
-      replace: true,
+      replace: false,
       state: { id, name }
     });
   }

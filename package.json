@@ -12,7 +12,7 @@
     "@ant-design/x": "^1.0.5",
     "@microsoft/fetch-event-source": "^2.0.1",
     "@react-pdf/renderer": "^3.4.4",
-    "antd-mobile": "^5.32.1",
+    "antd-mobile": "^5.42.3",
     "antd-mobile-icons": "^0.3.0",
     "bizgoblin": "^0.2.0",
     "color-convert": "^3.1.3",
