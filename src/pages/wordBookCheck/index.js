@@ -104,6 +104,10 @@ const WordBookCheck = () => {
     })
   }
 
+  const handleAddWord = () => {
+    navigate("/wordCreate", { replace: false });
+  }
+
   return (
     <div className="wordBookCheck">
       <Segmented
@@ -189,6 +193,13 @@ const WordBookCheck = () => {
           ) : <Empty description='暂无数据' style={{marginTop: '50%'}}/>
         }
       </div>
+      <Button
+        block
+        color='primary'
+        size='large'
+        onClick={() => handleAddWord()}>
+        添加单词
+      </Button>
     </div>
   )
 }

@@ -34,6 +34,7 @@ export default defineConfig({
     { path: "/wordBookCatalog", component: "wordBookCatalog", name: "单词本" },
     { path: "/wordBookCreate", component: "wordBookCreate", name: "创建单词本" },
     { path: "/wordBookCheck", component: "wordBookCheck", name: "查看单词本" },
+    { path: "/wordCreate", component: "wordCreate", name: "添加单词" },
     // { path: "/courseDetail", component: "courseDetail", name: "单词列表" },
     // { path: "/collectWord", component: "collectWord", name: "收藏" },
     // { path: "/wordSearch", component: "wordSearch", name: "单词搜索" },
