@@ -9,7 +9,7 @@ const Layout = (props) => {
   const { name } = routeProps;
 
   const right = (
-    <div style={{ fontSize: 24 }} onClick={() => navigate("/setting", { replace: true })}>
+    <div style={{ fontSize: 24 }} onClick={() => navigate("/setting", { replace: false })}>
       <SetOutline />
     </div>
   )
