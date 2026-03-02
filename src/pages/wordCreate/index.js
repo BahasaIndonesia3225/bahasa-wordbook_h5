@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import {useNavigate, connect } from 'umi';
+import {useNavigate, useLocation } from 'umi';
 import { Form, Input, TextArea, Button, Grid, Space, Image, Selector } from 'antd-mobile'
 import { request } from '@/services';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
@@ -9,6 +9,10 @@ import { TYPrompt } from '@/utils/format';
 import './index.less'
 
 const WordCreate = () => {
+  const navigate = useNavigate();
+  const stateParams = useLocation();
+  const { phraseId } = stateParams.state;
+
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false);
 
@@ -16,9 +20,19 @@ const WordCreate = () => {
     setLoading(true);
     const values = form.getFieldsValue();
     request.post('/prod-api/system/wordUser', {
-      data: values
+      data: { ...values, phraseId }
     }).then((res) => {
-      setLoading(false)
+      setLoading(false);
+      Toast.show({
+        icon: 'success',
+        content: '创建成功',
+        afterClose: () => {
+          navigate("/wordBookCheck", {
+            replace: true,
+            state: { phraseId, phraseName: "" }
+          });
+        },
+      })
     })
   }
 

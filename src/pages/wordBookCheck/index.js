@@ -24,7 +24,7 @@ const rightActions = [
 const WordBookCheck = () => {
   const stateParams = useLocation();
   const navigate = useNavigate();
-  const { id, name } = stateParams.state;
+  const { phraseId, phraseName } = stateParams.state;
 
   const [wordList, setWordList] = useState([]);
   const [total, setTotal] = useState(0);
@@ -34,7 +34,7 @@ const WordBookCheck = () => {
   const queryWordList = () => {
     request('/prod-api/system/wordUser/list', {
       method: 'GET',
-      params: { phraseId: id, pageNum: 1, pageSize: 100 }
+      params: { phraseId, pageNum: 1, pageSize: 100 }
     }).then(res => {
       const { rows, total } = res;
       setWordList(rows);
@@ -69,9 +69,9 @@ const WordBookCheck = () => {
     audio.load()
   }
 
-  //删除音频相关
+  //删除单词
   const handleDeleteAudio = (data) => {
-    const { id: wordId, word } = data;
+    const { id, word } = data;
     Dialog.show({
       header: (<Image style={{ width: 100 }} src='/image/rubsh.png'/>),
       content: `你确定要删除${word}单词`,
@@ -90,10 +90,7 @@ const WordBookCheck = () => {
             onClick: () => {
               request('/prod-api/system/wordUser/remove', {
                 method: 'DELETE',
-                data: {
-                  phraseId: id,
-                  id: wordId
-                }
+                data: { phraseId, id }
               }).then(res => {
                 queryWordList()
               })
@@ -105,7 +102,10 @@ const WordBookCheck = () => {
   }
 
   const handleAddWord = () => {
-    navigate("/wordCreate", { replace: false });
+    navigate("/wordCreate", {
+      replace: false,
+      state: { phraseId }
+    });
   }
 
   return (

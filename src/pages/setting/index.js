@@ -13,7 +13,7 @@ export default () => {
         <List.Item
           description='行为分析'
           onClick={() => {
-            navigate("/dataAnalysis", { replace: true })
+            navigate("/dataAnalysis", { replace: false })
           }}
         >
           数据面板

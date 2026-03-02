@@ -59,7 +59,7 @@ const WordBookCatalog = (props) => {
     const { id, name } = item;
     navigate("/wordBookCheck", {
       replace: false,
-      state: { id, name }
+      state: { phraseId: id, phraseName: name }
     });
   }
 

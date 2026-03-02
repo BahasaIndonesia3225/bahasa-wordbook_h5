@@ -12,7 +12,7 @@ export default () => {
     const link = type === "youtube" ? "https://www.youtube.com/channel/UCNz0CuIKBXpizEmn8akC42w" : "https://v.douyin.com/iNNrghAv/ 8@5.com";
     window.open(link, "_blank")
   }
-  
+
   return (
     <div className="home">
       <Mask opacity='thick' visible={visible}>
@@ -27,7 +27,10 @@ export default () => {
         className="logoCard"
         src='./image/home_logo_portuguesa.png'
       />
-      <Image style={{opacity: 0}} src='./image/WechatIMG4809.jpg'/>
+      <Image
+        style={{opacity: 0}}
+        src='./image/WechatIMG4809.jpg'
+      />
       <Image
         style={{marginBottom: 16, marginTop: 16}}
         src='./image/loginBtn.png'

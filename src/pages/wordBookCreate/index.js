@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import {useNavigate, connect } from 'umi';
-import { Form, Input, TextArea, Button, Picker, Space, Image } from 'antd-mobile'
+import { Form, Input, TextArea, Button, Picker, Space, Image, Toast } from 'antd-mobile'
 import { request } from '@/services';
 import countryCode from '@/utils/countryCode.json'
 import convert from 'color-convert';
@@ -18,6 +18,7 @@ const colorOptions = [
 ]
 
 const WordBookCreate = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false);
 
@@ -64,9 +65,16 @@ const WordBookCreate = () => {
     setLoading(true);
     const values = form.getFieldsValue();
     request.post('/prod-api/system/phrase', {
-      data: values
+      data: { ...values, language: values.language[0] }
     }).then((res) => {
-      setLoading(false)
+      setLoading(false);
+      Toast.show({
+        icon: 'success',
+        content: '创建成功',
+        afterClose: () => {
+          navigate("/wordBookCatalog", { replace: true });
+        },
+      })
     })
   }
 
@@ -78,7 +86,7 @@ const WordBookCreate = () => {
           initialValues={{
             name: "",
             colour: "",
-            language: "",
+            language: [],
             remark: "",
           }}
           onFinish={onFinish}

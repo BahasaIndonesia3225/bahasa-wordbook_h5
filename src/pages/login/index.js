@@ -12,7 +12,7 @@ const Login = (props) => {
   //登陆成功提示模态框
   let navigate = useNavigate();
   const handleInputSuccess = () => {
-    navigate("/wordBookCatalog", { replace: true });
+    navigate("/wordBookCatalog", { replace: false });
   }
 
   //登陆失败提示模态框（账户密码错误）
