@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {useNavigate, useLocation } from 'umi';
-import { Form, Input, TextArea, Button, Grid, Space, Image, Selector } from 'antd-mobile'
+import { Form, Input, TextArea, Button, Toast, Selector } from 'antd-mobile'
 import { request } from '@/services';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import countryCode from '@/utils/countryCode.json'
@@ -20,7 +20,7 @@ const WordCreate = () => {
     setLoading(true);
     const values = form.getFieldsValue();
     request.post('/prod-api/system/wordUser', {
-      data: { ...values, phraseId }
+      data: { ...values, state: values.state[0], phraseId }
     }).then((res) => {
       setLoading(false);
       Toast.show({
@@ -129,7 +129,7 @@ const WordCreate = () => {
             chinese: "",
             example: "",
             usage: "",
-            state: "",
+            state: [],
           }}
           onFinish={onFinish}
           footer={
