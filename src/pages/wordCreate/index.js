@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {useNavigate, connect } from 'umi';
 import { Form, Input, TextArea, Button, Grid, Space, Image, Selector } from 'antd-mobile'
 import { request } from '@/services';
@@ -22,12 +22,22 @@ const WordCreate = () => {
     })
   }
 
+  // 【新增】监听 form 中的 'word' 字段
+  // 它会实时返回 word 的当前值，并在值变化时重新渲染此组件
+  const wordValue = Form.useWatch('word', form);
+  const isButtonDisabled = aiLoading || !wordValue?.trim();
+
   const [aiLoading, setAiLoading] = useState(false);
   const url = process.env.NODE_ENV === 'development' ?
     '/compatible-mode/v1/chat/completions' :
     'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+  // 使用 ref 存储累计文本，避免 onmessage 闭包问题
+  const bufferRef = useRef("");
   const handleExportAiResult = () => {
     const word = form.getFieldValue('word');
+    if(!word) return;
+
+    bufferRef.current = ""; // 重置缓冲区
     const controller = new AbortController();
     const signal = controller.signal;
 
@@ -47,7 +57,7 @@ const WordCreate = () => {
           },
           {
             "role": "user",
-            "content": TYPrompt(message)
+            "content": TYPrompt(word)
           },
         ],
         "stream": true,
@@ -64,7 +74,22 @@ const WordCreate = () => {
         if(data !== "[DONE]") {
           const message = JSON.parse(data);
           const content = message.choices[0].delta.content.replaceAll("\n", "<br/>");
-          console.log(content);
+
+          // 【关键改进】：累计文本
+          bufferRef.current += content;
+          const fullContent = bufferRef.current;
+
+          // 在完整累计的文本中匹配（去掉原本的 replaceAll("\n", "<br/>")，正则更稳）
+          const chineseMatch = fullContent.match(/【中文：([\s\S]*?)(】|$)/);
+          const exampleMatch = fullContent.match(/【例句：([\s\S]*?)(】|$)/);
+          const usageMatch = fullContent.match(/【用法：([\s\S]*?)(】|$)/);
+
+          // 更新表单（利用实时更新让用户看到打字机效果）
+          const newValues = {};
+          if (chineseMatch && chineseMatch[1]) newValues.chinese = chineseMatch[1].trim();
+          if (exampleMatch && exampleMatch[1]) newValues.example = exampleMatch[1].trim();
+          if (usageMatch && usageMatch[1]) newValues.usage = usageMatch[1].trim();
+          form.setFieldsValue(newValues);
         }
       },
       onerror() {
@@ -108,27 +133,23 @@ const WordCreate = () => {
           <Form.Item
             name='word'
             label='单词原文'
-            rules={[{ required: true, message: '单词原文不能为空' }]}>
-            <Grid columns={4} gap={8}>
-              <Grid.Item span={3}>
-                <Input
-                  className="wordBookCreateInput"
-                  style={{ '--text-align': 'center' }}
-                  placeholder='请输入单词原文'
-                />
-              </Grid.Item>
-              <Grid.Item span={1}>
-                <Button
-                  onClick={() => handleExportAiResult()}
-                  color='primary'
-                  fill='none'
-                  loadingText='AI生成中'
-                  loading={aiLoading}
-                  style={{ height: 54 }}>
-                  AI填充
-                </Button>
-              </Grid.Item>
-            </Grid>
+            rules={[{ required: true, message: '单词原文不能为空' }]}
+            extra={
+              <Button
+                onClick={() => handleExportAiResult()}
+                color='primary'
+                fill='none'
+                loadingText='AI生成中'
+                loading={aiLoading}
+                disabled={isButtonDisabled}>
+                AI生成
+              </Button>
+            }>
+            <Input
+              className="wordBookCreateInput"
+              style={{ '--text-align': 'center' }}
+              placeholder='请输入单词原文'
+            />
           </Form.Item>
           <Form.Item
             name='chinese'
