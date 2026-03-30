@@ -1,0 +1,55 @@
+.wordBookShare {
+  padding: 16px 16px 12px;
+  .wordBookShareInner {
+    margin-bottom: 12px;
+    border-radius: 16px;
+    overflow: hidden;
+    .courseTitle {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      div.index {
+        span {
+          width: 40px;
+          height: 40px;
+          margin-right: 12px;
+          color: #ff3f45;
+          background: #ffecec;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      div.content {
+        span.title {
+          font-weight: bold;
+          margin-right: 12px;
+        }
+        span.chinese {}
+      }
+    }
+    .adm-card {
+      background: #f1f8fe;
+      .adm-card-header-title {
+        width: 100%;
+      }
+    }
+    .courseContent {
+      position: relative;
+      >div {
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
+        span:first-child {
+          font-size: 16px;
+          color: #1890ff;
+        }
+        span:last-child {
+          font-size: 16px;
+          color: #000000;
+        }
+      }
+    }
+  }
+}

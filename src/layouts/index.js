@@ -20,9 +20,9 @@ const Layout = (props) => {
   }
 
   return (
-    <div className='layout' style={{paddingTop: name ? 45 : 0}}>
+    <div className='layout' style={{paddingTop: (name && name !== '分享单词本') ? 45 : 0}}>
       {
-        name ?
+        (name && name !== '分享单词本') ?
           <NavBar
             className="navBar"
             back='返回'
